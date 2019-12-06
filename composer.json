@@ -1,0 +1,22 @@
+{
+  "name": "pennyappeal-charity/smartdebit-api",
+  "description": "Library for calling the SmartDebit API",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Penny Appeal",
+      "email": "developer@pennyappeal.org",
+      "homepage": "http://www.pennyappeal.org"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "ext-json": "*",
+    "guzzlehttp/guzzle": "^6.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "PennyAppeal\\SmartDebit\\": "src/"
+    }
+  }
+}
