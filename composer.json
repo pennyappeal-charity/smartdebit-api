@@ -2,6 +2,7 @@
   "name": "pennyappeal-charity/smartdebit-api",
   "description": "Library for calling the SmartDebit API",
   "type": "library",
+  "license": "MIT",
   "authors": [
     {
       "name": "Penny Appeal",
