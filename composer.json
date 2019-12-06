@@ -19,5 +19,8 @@
     "psr-4": {
       "PennyAppeal\\SmartDebit\\": "src/"
     }
+  },
+  "require-dev": {
+    "vlucas/phpdotenv": "^4.0"
   }
 }

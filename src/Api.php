@@ -53,15 +53,15 @@ class Api
      * @return ResponseInterface
      * @throws ConnectException if guzzle can't connect to the host
      */
-    protected function get($path, $params)
+    protected function get($path, $params = null)
     {
-        return $this->client->get(
-            $path,
-            [
-                'query' => $params,
-                'debug' => $this->debug,
-            ]
-        );
+        $options = [
+            'debug' => $this->debug,
+        ];
+        if (!is_null($params)) {
+            $options['query'] = $params;
+        }
+        return $this->client->get($path, $options);
     }
 
     /**
@@ -76,5 +76,10 @@ class Api
             'query[collection_date]' => $date->format('Y-m-d'),
         ];
         return $this->get('/api/get_successful_collection_report', $params);
+    }
+
+    public function systemStatus()
+    {
+        return $this->get('/api/system_status');
     }
 }

@@ -33,3 +33,7 @@ try {
     echo("ConnectException: {$exc->getMessage()}\n");
 }
 ```
+## Examples
+Before running any of the example scripts a ```.env``` file will need creating which contains your
+SmartDebit API credentials. Copy the ```env.example``` file to ```.env``` in the ```examples```
+directory and update it with your smartDebit API credentials.
