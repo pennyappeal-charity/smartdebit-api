@@ -22,13 +22,13 @@ $api = new Api(
     '<userAgent>'
 );
 
-$date = new DateTime('2019-11-15');
+$date = new DateTime();
 
 try {
     $response = $api->getSuccessfulCollectionReport($date);
 
-    echo("Response status code = {$response->getStatusCode()}\n");
-    echo("Response body =\n{$response->getBody()->getContents()}\n");
+    echo("Response status code = {$response->getStatusCode()}\n"
+        . "Response body =\n{$response->getBody()->getContents()}\n");
 } catch (ConnectException $exc) {
     echo("ConnectException: {$exc->getMessage()}\n");
 }

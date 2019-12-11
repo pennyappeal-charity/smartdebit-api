@@ -64,6 +64,29 @@ class Api
         return $this->client->get($path, $options);
     }
 
+    protected function post($path, $params = null)
+    {
+        $options = [
+            'debug' => $this->debug,
+        ];
+        if (!is_null($params)) {
+            $options['query'] = $params;
+        }
+        return $this->client->post($path, $options);
+    }
+
+    public function dataDump($payerReference = null, $format = 'XML')
+    {
+        $params = [
+            'query[service_user][pslid]' => $this->pslId,
+            'query[report_format]' => $format,
+        ];
+        if (!is_null($payerReference)) {
+            $params['query[reference_number]'] = $payerReference;
+        }
+        return $this->post('/api/data/dump', $params);
+    }
+
     /**
      * @param DateTime $date
      * @return ResponseInterface
