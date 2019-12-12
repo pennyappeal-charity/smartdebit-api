@@ -19,6 +19,6 @@ echo("SD_HOST: {$host}\nSD_USER: {$user}\nSD_PASS: {$pass}\nSD_PSLID: {$pslId}\n
 
 function dumpApiResponse(ResponseInterface $response)
 {
-    echo("Response status code = {$response->getStatusCode()}\n");
-    echo("Response body =\n{$response->getBody()->getContents()}\n");
+    echo("Response status code = {$response->getStatusCode()}\n"
+        . "Response body =\n{$response->getBody()->getContents()}\n");
 }

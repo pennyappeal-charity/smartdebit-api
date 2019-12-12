@@ -37,3 +37,6 @@ try {
 Before running any of the example scripts a ```.env``` file will need creating which contains your
 SmartDebit API credentials. Copy the ```env.example``` file to ```.env``` in the ```examples```
 directory and update it with your smartDebit API credentials.
+
+Before running the ```ddiVariable*``` examples copy the ```ddiVariableValidate.json.template```
+file and update any copies with your own content.

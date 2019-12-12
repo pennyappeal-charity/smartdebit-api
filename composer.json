@@ -20,6 +20,11 @@
       "PennyAppeal\\SmartDebit\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "PennyAppeal\\SmartDebitExample\\": "examples/classes/"
+    }
+  },
   "require-dev": {
     "vlucas/phpdotenv": "^4.0"
   }
