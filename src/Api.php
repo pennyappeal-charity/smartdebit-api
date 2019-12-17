@@ -168,6 +168,32 @@ class Api
         return $this->get('/api/get_successful_collection_report', $params);
     }
 
+    public function indemnityList(
+        DateTime $fromDate = null,
+        DateTime $toDate = null,
+        $maxResults = 100,
+        $startIndex = 0,
+        $idFrom = null
+    ) {
+        $params = [
+            'query[service_user][pslid]' => $this->pslId,
+            'query[max_results]' => $maxResults,
+        ];
+        if (!is_null($fromDate)) {
+            $params['query[from_date]'] = $fromDate->format('Y-m-d');
+        }
+        if (!is_null($toDate)) {
+            $params['query[till_date]'] = $toDate->format('Y-m-d');
+        }
+        if ($startIndex != 0) {
+            $params['query[start_index]'] = $startIndex;
+        }
+        if (!is_null($idFrom)) {
+            $params['id_from'] = $idFrom;
+        }
+        return $this->post('/api/indemnity/list', $params);
+    }
+
     public function systemStatus()
     {
         return $this->get('/api/system_status');
