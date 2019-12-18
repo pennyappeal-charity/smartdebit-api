@@ -168,6 +168,15 @@ class Api
         return $this->get('/api/get_successful_collection_report', $params);
     }
 
+    public function indemnity($importId)
+    {
+        $importId = (int)$importId;
+        $params = [
+            'query[service_user][pslid]' => $this->pslId,
+        ];
+        return $this->get("/api/indemnity/{$importId}", $params);
+    }
+
     public function indemnityList(
         DateTime $fromDate = null,
         DateTime $toDate = null,

@@ -17,8 +17,18 @@ $agent = getenv('SD_AGENT');
 
 echo("SD_HOST: {$host}\nSD_USER: {$user}\nSD_PASS: {$pass}\nSD_PSLID: {$pslId}\nSD_AGENT: {$agent}\n");
 
+function dumpStatusCode(ResponseInterface $response)
+{
+    echo("Response status code = {$response->getStatusCode()}\n");
+}
+
+function dumpContents(string $contents)
+{
+    echo("Response body =\n{$contents}\n");
+}
+
 function dumpApiResponse(ResponseInterface $response)
 {
-    echo("Response status code = {$response->getStatusCode()}\n"
-        . "Response body =\n{$response->getBody()->getContents()}\n");
+    dumpStatusCode($response);
+    dumpContents($response->getBody()->getContents());
 }
