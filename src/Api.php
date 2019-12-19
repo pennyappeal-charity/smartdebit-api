@@ -142,6 +142,43 @@ class Api
         return $params;
     }
 
+    protected function getListParams(
+        DateTime $fromDate = null,
+        DateTime $toDate = null,
+        $maxResults = 100,
+        $startIndex = 0,
+        $idFrom = null
+    ) {
+        $params = [
+            'query[service_user][pslid]' => $this->pslId,
+            'query[max_results]' => $maxResults,
+        ];
+        if (!is_null($fromDate)) {
+            $params['query[from_date]'] = $fromDate->format('Y-m-d');
+        }
+        if (!is_null($toDate)) {
+            $params['query[till_date]'] = $toDate->format('Y-m-d');
+        }
+        if ($startIndex != 0) {
+            $params['query[start_index]'] = $startIndex;
+        }
+        if (!is_null($idFrom)) {
+            $params['id_from'] = $idFrom;
+        }
+        return $params;
+    }
+
+    public function addacList(
+        DateTime $fromDate = null,
+        DateTime $toDate = null,
+        $maxResults = 100,
+        $startIndex = 0,
+        $idFrom = null
+    ) {
+        $params = $this->getListParams($fromDate, $toDate, $maxResults, $startIndex, $idFrom);
+        return $this->post('/api/addac/list', $params);
+    }
+
     public function ddiVariableValidate(array $data)
     {
         $params = $this->ddiVariableParams($data);
@@ -184,22 +221,7 @@ class Api
         $startIndex = 0,
         $idFrom = null
     ) {
-        $params = [
-            'query[service_user][pslid]' => $this->pslId,
-            'query[max_results]' => $maxResults,
-        ];
-        if (!is_null($fromDate)) {
-            $params['query[from_date]'] = $fromDate->format('Y-m-d');
-        }
-        if (!is_null($toDate)) {
-            $params['query[till_date]'] = $toDate->format('Y-m-d');
-        }
-        if ($startIndex != 0) {
-            $params['query[start_index]'] = $startIndex;
-        }
-        if (!is_null($idFrom)) {
-            $params['id_from'] = $idFrom;
-        }
+        $params = $this->getListParams($fromDate, $toDate, $maxResults, $startIndex, $idFrom);
         return $this->post('/api/indemnity/list', $params);
     }
 

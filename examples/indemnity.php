@@ -4,21 +4,12 @@ use PennyAppeal\SmartDebit\Api;
 
 include "bootstrap.php";
 
-function usage()
-{
-    throw new Exception("\nUsage: php " . __FILE__ . " <import_id>\n");
-}
-
-if ($argc != 2) {
-    usage();
-}
-$importId = (int)$argv[1];
-
-$api = new Api($host, $user, $pass, $pslId, $agent);
+$importId = $app->getImportIdArg();
+$api = new Api($app->getHost(), $app->getUser(), $app->getPass(), $app->getPslId(), $app->getAgent());
 $response = $api->indemnity($importId);
-dumpStatusCode($response);
+$app->dumpStatusCode($response);
 $xmlData = $response->getBody()->getContents();
-dumpContents($xmlData);
+$app->dumpContents($xmlData);
 
 $xml = simplexml_load_string($xmlData);
 if (isset($xml->file)) {

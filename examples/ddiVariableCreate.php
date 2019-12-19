@@ -6,7 +6,7 @@ use PennyAppeal\SmartDebitExample\JsonFileLoader;
 include "bootstrap.php";
 
 $loader = new JsonFileLoader();
-$api = new Api($host, $user, $pass, $pslId, $agent);
-dumpApiResponse(
+$api = new Api($app->getHost(), $app->getUser(), $app->getPass(), $app->getPslId(), $app->getAgent());
+$app->dumpApiResponse(
     $api->ddiVariableCreate($loader->getDecodedJson())
 );

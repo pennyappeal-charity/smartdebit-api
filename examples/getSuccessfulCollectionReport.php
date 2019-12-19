@@ -2,15 +2,10 @@
 
 use PennyAppeal\SmartDebit\Api;
 
-if ($argc == 2 && ($date = date_create($argv[1]))) {
-    include "bootstrap.php";
+include "bootstrap.php";
 
-    $api = new Api($host, $user, $pass, $pslId, $agent);
-
-    dumpApiResponse(
-        $api->getSuccessfulCollectionReport($date)
-    );
-
-} else {
-    echo("Usage: \"php " . __FILE__ . " <date>\"\n");
-}
+$date = $app->getDateArg();
+$api = new Api($app->getHost(), $app->getUser(), $app->getPass(), $app->getPslId(), $app->getAgent());
+$app->dumpApiResponse(
+    $api->getSuccessfulCollectionReport($date)
+);

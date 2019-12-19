@@ -4,8 +4,8 @@ include "bootstrap.php";
 
 use PennyAppeal\SmartDebit\Api;
 
-$api = new Api($host, $user, $pass, $pslId, $agent);
+$api = new Api($app->getHost(), $app->getUser(), $app->getPass(), $app->getPslId(), $app->getAgent());
 
-dumpApiResponse(
+$app->dumpApiResponse(
     $api->systemStatus()
 );

@@ -50,7 +50,7 @@ class JsonFileLoader
      */
     protected function usage()
     {
-        throw new Exception("\nUsage: php <php file> [-f <json filename>]\n");
+        throw new Exception("\nUsage: php <php file> -f <json filename>\n");
     }
 
     /**

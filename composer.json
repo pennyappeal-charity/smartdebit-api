@@ -26,6 +26,7 @@
     }
   },
   "require-dev": {
+    "ext-simplexml": "*",
     "vlucas/phpdotenv": "^4.0"
   }
 }
