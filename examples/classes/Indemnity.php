@@ -11,7 +11,7 @@ trait Indemnity
      */
     protected function indemnityUsage()
     {
-        throw new Exception("\nUsage: php " . __FILE__ . " <import_id>\n");
+        throw new Exception("\nUsage: php <command> <id>\n");
     }
 
     /**

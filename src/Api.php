@@ -168,6 +168,15 @@ class Api
         return $params;
     }
 
+    public function addac($addacId)
+    {
+        $addacId = (int)$addacId;
+        $params = [
+            'query[service_user][pslid]' => $this->pslId,
+        ];
+        return $this->get("/api/addac/{$addacId}", $params);
+    }
+
     public function addacList(
         DateTime $fromDate = null,
         DateTime $toDate = null,
