@@ -1,5 +1,5 @@
 # smartdebit-api
-PHP library for calling the SmartDebit API
+PHP library for calling a subset of the SmartDebit API
 
 ## Installation
 ```bash
@@ -40,3 +40,22 @@ directory and update it with your smartDebit API credentials.
 
 Before running the ```ddiVariable*``` examples copy the ```ddiVariableValidate.json.template```
 file and update any copies with your own content.
+
+## Implemented API calls
+* ```/api/data/dump```
+* ```/api/addac/<addacId>```
+* ```/api/addac/list```
+* ```/api/arudd/<arrudId>```
+* ```/api/arudd/list```
+* ```/api/auddis/<auddisId>```
+* ```/api/auddis/list```
+* ```/api/ddi/variable/validate```
+* ```/api/ddi/variable/create``` (not including multiple initial collections)
+* ```/api/get_successful_collection_report```
+* ```/api/indemnity/<indemnityId>```
+* ```/api/indemnity/list```
+* ```/api/system_status```
+
+## Additional Calls
+* ```setDebug(true | false | stream handle);``` Output connection debugging information to either
+stdout or a stream
