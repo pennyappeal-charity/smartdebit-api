@@ -6,10 +6,10 @@ use Psr\Http\Message\ResponseInterface;
 
 class App
 {
+    use Bacs;
+    use BacsList;
     use DataDump;
     use GetSuccessfulCollectionReport;
-    use Indemnity;
-    use IndemnityList;
 
     protected $argc;
     protected $argv;

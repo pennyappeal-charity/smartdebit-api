@@ -4,7 +4,7 @@ use PennyAppeal\SmartDebit\Api;
 
 include "bootstrap.php";
 
-$args = $app->getIndemnityListArgs();
+$args = $app->getBacsListArgs();
 $api = new Api($app->getHost(), $app->getUser(), $app->getPass(), $app->getPslId(), $app->getAgent());
 $app->dumpApiResponse(
     $api->indemnityList($args['fromDate'], $args['tillDate'], $args['maxResults'], $args['startIndex'], $args['idFrom'])

@@ -110,6 +110,32 @@ class Api
         return $this->client->post($path, $options);
     }
 
+    protected function getBacsListParams(
+        DateTime $fromDate = null,
+        DateTime $toDate = null,
+        $maxResults = 100,
+        $startIndex = 0,
+        $idFrom = null
+    ) {
+        $params = [
+            'query[service_user][pslid]' => $this->pslId,
+            'query[max_results]' => $maxResults,
+        ];
+        if (!is_null($fromDate)) {
+            $params['query[from_date]'] = $fromDate->format('Y-m-d');
+        }
+        if (!is_null($toDate)) {
+            $params['query[till_date]'] = $toDate->format('Y-m-d');
+        }
+        if ($startIndex != 0) {
+            $params['query[start_index]'] = $startIndex;
+        }
+        if (!is_null($idFrom)) {
+            $params['id_from'] = $idFrom;
+        }
+        return $params;
+    }
+
     public function dataDump($payerReference = null, $format = 'XML')
     {
         $params = [
@@ -142,32 +168,6 @@ class Api
         return $params;
     }
 
-    protected function getListParams(
-        DateTime $fromDate = null,
-        DateTime $toDate = null,
-        $maxResults = 100,
-        $startIndex = 0,
-        $idFrom = null
-    ) {
-        $params = [
-            'query[service_user][pslid]' => $this->pslId,
-            'query[max_results]' => $maxResults,
-        ];
-        if (!is_null($fromDate)) {
-            $params['query[from_date]'] = $fromDate->format('Y-m-d');
-        }
-        if (!is_null($toDate)) {
-            $params['query[till_date]'] = $toDate->format('Y-m-d');
-        }
-        if ($startIndex != 0) {
-            $params['query[start_index]'] = $startIndex;
-        }
-        if (!is_null($idFrom)) {
-            $params['id_from'] = $idFrom;
-        }
-        return $params;
-    }
-
     public function addac($addacId)
     {
         $addacId = (int)$addacId;
@@ -184,7 +184,7 @@ class Api
         $startIndex = 0,
         $idFrom = null
     ) {
-        $params = $this->getListParams($fromDate, $toDate, $maxResults, $startIndex, $idFrom);
+        $params = $this->getBacsListParams($fromDate, $toDate, $maxResults, $startIndex, $idFrom);
         return $this->post('/api/addac/list', $params);
     }
 
@@ -195,7 +195,7 @@ class Api
         $startIndex = 0,
         $idFrom = null
     ) {
-        $params = $this->getListParams($fromDate, $toDate, $maxResults, $startIndex, $idFrom);
+        $params = $this->getBacsListParams($fromDate, $toDate, $maxResults, $startIndex, $idFrom);
         return $this->post('/api/arudd/list', $params);
     }
 
@@ -206,6 +206,26 @@ class Api
             'query[service_user][pslid]' => $this->pslId,
         ];
         return $this->get("/api/arudd/{$aruddId}", $params);
+    }
+
+    public function auddisList(
+        DateTime $fromDate = null,
+        DateTime $toDate = null,
+        $maxResults = 100,
+        $startIndex = 0,
+        $idFrom = null
+    ) {
+        $params = $this->getBacsListParams($fromDate, $toDate, $maxResults, $startIndex, $idFrom);
+        return $this->post('/api/auddis/list', $params);
+    }
+
+    public function auddis($auddisId)
+    {
+        $auddisId = (int)$auddisId;
+        $params = [
+            'query[service_user][pslid]' => $this->pslId,
+        ];
+        return $this->get("/api/auddis/{$auddisId}", $params);
     }
 
     public function ddiVariableValidate(array $data)
@@ -250,7 +270,7 @@ class Api
         $startIndex = 0,
         $idFrom = null
     ) {
-        $params = $this->getListParams($fromDate, $toDate, $maxResults, $startIndex, $idFrom);
+        $params = $this->getBacsListParams($fromDate, $toDate, $maxResults, $startIndex, $idFrom);
         return $this->post('/api/indemnity/list', $params);
     }
 

@@ -2,15 +2,15 @@
 
 namespace PennyAppeal\SmartDebitExample;
 
-trait IndemnityList
+trait BacsList
 {
-    protected function indemnityListUsage()
+    protected function bacsListUsage()
     {
         throw new Exception("\nUsage: php indemnityList.php [--max_results <max>] [--start_index <index>] "
             . "[--id_from <id>] [--from_date <from> --till_date <till>]\n");
     }
 
-    public function getIndemnityListArgs()
+    public function getBacsListArgs()
     {
         $args = [
             'maxResults' => null,
@@ -46,7 +46,7 @@ trait IndemnityList
                     $argIndex++;
                     break;
                 default:
-                    $this->indemnityListUsage();
+                    $this->bacsListUsage();
             }
         }
         return $args;
