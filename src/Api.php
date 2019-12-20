@@ -188,6 +188,26 @@ class Api
         return $this->post('/api/addac/list', $params);
     }
 
+    public function aruddList(
+        DateTime $fromDate = null,
+        DateTime $toDate = null,
+        $maxResults = 100,
+        $startIndex = 0,
+        $idFrom = null
+    ) {
+        $params = $this->getListParams($fromDate, $toDate, $maxResults, $startIndex, $idFrom);
+        return $this->post('/api/arudd/list', $params);
+    }
+
+    public function arudd($aruddId)
+    {
+        $aruddId = (int)$aruddId;
+        $params = [
+            'query[service_user][pslid]' => $this->pslId,
+        ];
+        return $this->get("/api/arudd/{$aruddId}", $params);
+    }
+
     public function ddiVariableValidate(array $data)
     {
         $params = $this->ddiVariableParams($data);
