@@ -36,7 +36,7 @@ try {
 ## Examples
 Before running any of the example scripts a ```.env``` file will need creating which contains your
 SmartDebit API credentials. Copy the ```env.example``` file to ```.env``` in the ```examples```
-directory and update it with your smartDebit API credentials.
+directory and update it with your details.
 
 Before running the ```ddiVariable*``` examples copy the ```ddiVariableValidate.json.template```
 file and update any copies with your own content.
@@ -55,6 +55,8 @@ file and update any copies with your own content.
 * ```/api/indemnity/<indemnityId>```
 * ```/api/indemnity/list```
 * ```/api/system_status```
+* ```/api/payer_file/async_import```
+* ```/api/payer_file/<payer file import id>```
 
 ## Additional Calls
 * ```setDebug(true | false | stream handle);``` Output connection debugging information to either

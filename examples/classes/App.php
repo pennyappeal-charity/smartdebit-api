@@ -10,6 +10,7 @@ class App
     use BacsList;
     use DataDump;
     use GetSuccessfulCollectionReport;
+    use PayerFileImport;
 
     protected $argc;
     protected $argv;

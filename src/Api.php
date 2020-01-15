@@ -99,13 +99,18 @@ class Api
         return $this->client->get($path, $options);
     }
 
+    /**
+     * @param $path
+     * @param null $params
+     * @return ResponseInterface
+     */
     protected function post($path, $params = null)
     {
         $options = [
             'debug' => $this->debug,
         ];
         if (!is_null($params)) {
-            $options['query'] = $params;
+            $options['form_params'] = $params;
         }
         return $this->client->post($path, $options);
     }
@@ -277,5 +282,27 @@ class Api
     public function systemStatus()
     {
         return $this->get('/api/system_status');
+    }
+
+    /**
+     * @param string $filename The name of the data being imported
+     * @param string $csvData The actual data
+     * @param string $action CREATE or UPDATE
+     * @return ResponseInterface
+     */
+    public function payerFileAsyncImport(string $filename, string $csvData, string $action)
+    {
+        $params = [
+            'payer_file_import[service_user][pslid]' => $this->pslId,
+            'payer_file_import[file_name]' => $filename,
+            'payer_file_import[file]' => base64_encode($csvData),
+            'payer_file_import[action]' => $action,
+        ];
+        return $this->post('/api/payer_file/async_import', $params);
+    }
+
+    public function payerFileAsyncImportStatus($importId)
+    {
+        return $this->get("/api/payer_file/{$importId}");
     }
 }
