@@ -54,7 +54,7 @@ class Api
             'start_date',       // Y-m-d,
             'end_date',         // Y-m-d, optional
             'default_amount',   // integer, in pence
-            'regular_amount'    // integer, in pence
+            'regular_amount',   // integer, in pence
             'first_amount',     // integer, in pence, optional (uses default_amount if not present)
             'frequency_factor', // optional, can be 1, 2, 3 or 4, default is 1, collect every n frequency_types
             'title',            // 1 to 32 characters
