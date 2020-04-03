@@ -39,6 +39,11 @@ class Api
         $this->setVariableKeys();
     }
 
+    protected function isVariableKey($key)
+    {
+        return in_array($key, $this->variableKeys);
+    }
+
     protected function setVariableKeys()
     {
         $this->variableKeys = [
@@ -154,26 +159,6 @@ class Api
         return $this->post('/api/data/dump', $params);
     }
 
-    protected function isVariableKey($key)
-    {
-        return in_array($key, $this->variableKeys);
-    }
-
-    protected function ddiVariableParams(array $data)
-    {
-        $params = [
-            'variable_ddi[service_user][pslid]' => $this->pslId,
-        ];
-        foreach ($data as $key => $value) {
-            if ($this->isVariableKey($key)) {
-                $params["variable_ddi[{$key}]"] = $value;
-            } elseif ($key == 'debits') {
-                // @todo add multiple initial collections
-            }
-        }
-        return $params;
-    }
-
     public function addac($addacId)
     {
         $addacId = (int)$addacId;
@@ -232,6 +217,21 @@ class Api
             'query[service_user][pslid]' => $this->pslId,
         ];
         return $this->get("/api/auddis/{$auddisId}", $params);
+    }
+
+    protected function ddiVariableParams(array $data)
+    {
+        $params = [
+            'variable_ddi[service_user][pslid]' => $this->pslId,
+        ];
+        foreach ($data as $key => $value) {
+            if ($this->isVariableKey($key)) {
+                $params["variable_ddi[{$key}]"] = $value;
+            } elseif ($key == 'debits') {
+                // @todo add multiple initial collections
+            }
+        }
+        return $params;
     }
 
     public function ddiVariableValidate(array $data)
