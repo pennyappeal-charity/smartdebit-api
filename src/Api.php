@@ -3,6 +3,7 @@
 namespace PennyAppeal\SmartDebit;
 
 use DateTime;
+use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
 use Psr\Http\Message\ResponseInterface;
@@ -42,6 +43,23 @@ class Api
     protected function isVariableKey($key)
     {
         return in_array($key, $this->variableKeys);
+    }
+
+    /**
+     * Check if the given parameter is a valid SmartDebit extended parameter - an array with 2 keys: amount and date
+     * the amount must be an integer and the date must in the format Y-m-d
+     * @param $data
+     * @return bool
+     */
+    protected function isExtendedParameter($data)
+    {
+        if (is_array($data) && array_key_exists('amount', $data) && array_key_exists('date', $data)) {
+            $date = date_create_from_format('Y-m-d', $data['date']);
+            if ((ctype_digit($data['amount']) || is_int($data['amount'])) && $date !== false) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected function setVariableKeys()
@@ -219,6 +237,11 @@ class Api
         return $this->get("/api/auddis/{$auddisId}", $params);
     }
 
+    /**
+     * @param array $data
+     * @return array
+     * @throws Exception
+     */
     protected function ddiVariableParams(array $data)
     {
         $params = [
@@ -228,7 +251,7 @@ class Api
             if ($this->isVariableKey($key)) {
                 $params["variable_ddi[{$key}]"] = $value;
             } elseif ($key == 'debits') {
-                // @todo add multiple initial collections
+                throw new Exception("Extended parameters are not implemented");
             }
         }
         return $params;
@@ -244,6 +267,13 @@ class Api
     {
         $params = $this->ddiVariableParams($data);
         return $this->post('/api/ddi/variable/create', $params);
+    }
+
+    public function ddiVariableUpdate(string $reference, array $data)
+    {
+        $params = $this->ddiVariableParams($data);
+        $params['variable_ddi[reference_number]'] = $reference;
+        return $this->post("/api/ddi/variable/{$reference}/update", $params);
     }
 
     /**

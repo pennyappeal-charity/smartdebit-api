@@ -2,6 +2,8 @@
 
 namespace PennyAppeal\SmartDebitExample;
 
+use Exception;
+
 trait BacsList
 {
     protected function bacsListUsage()

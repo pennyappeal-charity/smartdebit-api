@@ -9,6 +9,7 @@ class App
     use Bacs;
     use BacsList;
     use DataDump;
+    use DdiVariableUpdate;
     use GetSuccessfulCollectionReport;
     use PayerFileImport;
 
